@@ -3,6 +3,8 @@ import { BaseComponent } from '../base-component';
 import { SystemContext } from 'src/app/utils/system-context';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ConfigManager } from 'src/app/utils/config-manager';
+import { HeaderService, CounterType } from 'src/app/services/header-service';
+import { isNullOrUndefined } from 'util';
 
 @Component({
   selector: 'app-header',
@@ -11,11 +13,39 @@ import { ConfigManager } from 'src/app/utils/config-manager';
 })
 export class HeaderComponent extends BaseComponent implements OnInit {
 
-  constructor(public dialog: MatDialog) {
+  constructor(public dialog: MatDialog, private headerService: HeaderService) {
     super();
   }
 
+  private interval: NodeJS.Timer = null;
+
+  private timeLeft = 10;
+
+  private showCounter = true;
+
   ngOnInit() {
+    this.headerService.counterChange$.subscribe(
+      (v: CounterType) => {
+        if (v.startEndFlg) {
+          this.interval = setInterval(() => {
+            if (this.timeLeft > 0) {
+              this.timeLeft--;
+            } else {
+              clearInterval(this.interval);
+              this.interval = null;
+              this.showCounter = false;
+              this.headerService.timeOut = true;
+            }
+          }, 1000);
+        } else {
+          this.showCounter = false;
+          if (!isNullOrUndefined(this.interval)) {
+            clearInterval(this.interval);
+            this.interval = null;
+          }
+        }
+      }
+    );
   }
 
   public loginButton() {
@@ -38,6 +68,12 @@ export class HeaderComponent extends BaseComponent implements OnInit {
     SystemContext.isManager = false;
     this.isManager = false;
   }
+
+  public startCountTime = false;
+
+  public time = 10;
+
+
 }
 
 @Component({

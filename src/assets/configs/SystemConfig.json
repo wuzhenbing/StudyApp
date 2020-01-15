@@ -1,3 +1,5 @@
 {
-    "ManagerPassword": "000000000"
+    "ManagerPassword": "000000000",
+    "WordPerTime": "10",
+    "SentencePerTime": "30"
 }

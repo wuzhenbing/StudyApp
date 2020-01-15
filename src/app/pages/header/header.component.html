@@ -1,4 +1,5 @@
-<div class="button-row">
+<div>
     <button *ngIf="!isManager" mat-raised-button color="primary" (click)="loginButton()">管理者ログイン</button>
     <button *ngIf="isManager" mat-raised-button color="warn" (click)="logoutButton()">管理者ログアウト</button>
+    <span *ngIf="showCounter">残り時間{{timeLeft}}秒</span>
 </div>
