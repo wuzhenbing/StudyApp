@@ -1,7 +1,7 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { BaseComponent } from '../base-component';
 import { SystemContext } from 'src/app/utils/system-context';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ConfigManager } from 'src/app/utils/config-manager';
 
 @Component({
@@ -19,9 +19,12 @@ export class HeaderComponent extends BaseComponent implements OnInit {
   }
 
   public loginButton() {
-    const dialogRef = this.dialog.open(LoginDialogComponent, {
-      width: '250px'
-    });
+    const dialogRef = this.dialog.open(
+      LoginDialog,
+      {
+        width: '300px'
+      }
+    );
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
@@ -37,14 +40,12 @@ export class HeaderComponent extends BaseComponent implements OnInit {
   }
 }
 
-
 @Component({
-  selector: 'app-login-dialog',
-  templateUrl: 'login-dialog.component.html',
+  selector: 'login-dialog',
+  templateUrl: 'login-dialog.html',
 })
-export class LoginDialogComponent {
-  constructor(
-    public dialogRef: MatDialogRef<LoginDialogComponent>) { }
+export class LoginDialog {
+  constructor(public dialogRef: MatDialogRef<LoginDialog>) { }
 
   public password: string;
 

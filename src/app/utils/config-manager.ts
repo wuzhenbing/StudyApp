@@ -14,7 +14,7 @@ export class ConfigManager {
 
     /** get all config info from SystemConfig.json file */
     public static init(client: HttpClient) {
-        client.get(this.configFilePath).subscribe(
+        return client.get(this.configFilePath).subscribe(
             (data) => {
                 this.cacheInfo = data;
             }

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ConfigManager } from './utils/config-manager';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
@@ -10,11 +12,12 @@ export class AppComponent implements OnInit {
 
   title = '学習アプリ';
 
-  public constructor(private router: Router) {
+  public constructor(private router: Router, private http: HttpClient) {
 
   }
 
   ngOnInit(): void {
+    ConfigManager.init(this.http);
     this.router.navigate(['MainPage']);
   }
 }
