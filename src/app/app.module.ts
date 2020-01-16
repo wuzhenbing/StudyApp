@@ -9,13 +9,15 @@ import { HeaderComponent, LoginDialog } from './pages/header/header.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AllMaterialModule } from './all-material-module';
 import { FormsModule } from '@angular/forms';
+import { TopinfoComponent } from './components/topinfo/topinfo.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MainPageComponent,
     HeaderComponent,
-    LoginDialog
+    LoginDialog,
+    TopinfoComponent
   ],
   imports: [
     BrowserModule,
