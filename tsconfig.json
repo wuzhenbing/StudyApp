@@ -17,14 +17,14 @@
     "lib": [
       "es2018",
       "dom"
+    ],
+    "allowJs": true,
+    "types": [
+      "node"
     ]
   },
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,
     "strictInjectionParameters": true
-  },
-  "compilerOptions": {
-    "experimentalDecorators": true,
-    "allowJs": true,
   }
 }

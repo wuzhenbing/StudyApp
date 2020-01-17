@@ -17,7 +17,14 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    ConfigManager.init(this.http);
-    this.router.navigate(['MainPage']);
+    ConfigManager.init(this.http).then(
+      () => {
+        this.router.navigate(['MainPage']);
+      }
+    ).catch(
+      (error) => {
+        console.error(error);
+      }
+    );
   }
 }

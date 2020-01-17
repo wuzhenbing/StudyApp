@@ -7,6 +7,8 @@ export class ConfigManager {
 
     public static passKey = 'ManagerPassword';
 
+    public static uslKey = 'ApiUrl';
+
     private static readonly configFilePath = 'assets/configs/SystemConfig.json';
     private constructor() {
 
@@ -14,11 +16,17 @@ export class ConfigManager {
 
     /** get all config info from SystemConfig.json file */
     public static init(client: HttpClient) {
-        return client.get(this.configFilePath).subscribe(
-            (data) => {
-                this.cacheInfo = data;
-            }
-        );
+        return new Promise((resolve, reject) => {
+            client.get(this.configFilePath).subscribe(
+                (data) => {
+                    this.cacheInfo = data;
+                    resolve();
+                },
+                (error) => {
+                    reject(error);
+                }
+            );
+        });
     }
 
     public static getValue<T>(key: string) {

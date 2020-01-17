@@ -5,6 +5,7 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ConfigManager } from 'src/app/utils/config-manager';
 import { HeaderService, CounterType } from 'src/app/services/header-service';
 import { isNullOrUndefined } from 'util';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -13,11 +14,11 @@ import { isNullOrUndefined } from 'util';
 })
 export class HeaderComponent extends BaseComponent implements OnInit {
 
-  constructor(public dialog: MatDialog, private headerService: HeaderService) {
+  constructor(public dialog: MatDialog, private headerService: HeaderService, private router: Router) {
     super();
   }
 
-  private interval: NodeJS.Timer = null;
+  private interval: any = null;
 
   private timeLeft = 10;
 
@@ -26,7 +27,7 @@ export class HeaderComponent extends BaseComponent implements OnInit {
   ngOnInit() {
     this.headerService.counterChange$.subscribe(
       (v: CounterType) => {
-        if (v.startEndFlg) {
+        if (v && v.startEndFlg) {
           this.interval = setInterval(() => {
             if (this.timeLeft > 0) {
               this.timeLeft--;
@@ -69,11 +70,9 @@ export class HeaderComponent extends BaseComponent implements OnInit {
     this.isManager = false;
   }
 
-  public startCountTime = false;
-
-  public time = 10;
-
-
+  public textBoxManager() {
+    this.router.navigate(['TextBoxManager']);
+  }
 }
 
 @Component({

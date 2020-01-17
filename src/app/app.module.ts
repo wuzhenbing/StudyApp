@@ -10,6 +10,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AllMaterialModule } from './all-material-module';
 import { FormsModule } from '@angular/forms';
 import { TopinfoComponent } from './components/topinfo/topinfo.component';
+import { TextboxinfoComponent } from './components/textbox/textboxinfo/textboxinfo.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { TopinfoComponent } from './components/topinfo/topinfo.component';
     MainPageComponent,
     HeaderComponent,
     LoginDialog,
-    TopinfoComponent
+    TopinfoComponent,
+    TextboxinfoComponent
   ],
   imports: [
     BrowserModule,

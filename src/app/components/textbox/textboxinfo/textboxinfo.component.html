@@ -1,4 +1,4 @@
-<table mat-table [dataSource]="topInfos" class="mat-elevation-z8">
+<table mat-table [dataSource]="textBooxInfos" class="mat-elevation-z8">
     <ng-container matColumnDef="select">
         <td mat-cell *matCellDef="let row">
             <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null"
@@ -18,23 +18,8 @@
     </ng-container>
 
     <ng-container matColumnDef="type">
-        <th mat-header-cell *matHeaderCellDef> タイプ </th>
-        <td mat-cell *matCellDef="let element"> {{element.type}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="planTime">
-        <th mat-header-cell *matHeaderCellDef> 予想時間 </th>
-        <td mat-cell *matCellDef="let element"> {{element.planTime}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="costTime">
-        <th mat-header-cell *matHeaderCellDef> 時間実績 </th>
-        <td mat-cell *matCellDef="let element"> {{element.costTime}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="score">
-        <th mat-header-cell *matHeaderCellDef> 成績 </th>
-        <td mat-cell *matCellDef="let element"> {{element.score}} </td>
+        <th mat-header-cell *matHeaderCellDef> 課程数 </th>
+        <td mat-cell *matCellDef="let element"> {{element.courseCount}} </td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
