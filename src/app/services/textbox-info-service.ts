@@ -7,6 +7,6 @@ export class TextBookInfosService extends BaseService {
         super(httpClient);
     }
     public getTextBookInfos<T>(): Observable<T> {
-        return this.httpClient.get<T>(this.ApiUrl + `/TextBoox?Action=selectAll`);
+        return this.httpClient.get<T>(this.ApiUrl + `/TextBoox?ACTION=selectAll`);
     }
 }
