@@ -68,6 +68,7 @@ export class HeaderComponent extends BaseComponent implements OnInit {
   public logoutButton() {
     SystemContext.isManager = false;
     this.isManager = false;
+    this.router.navigate(['MainPage']);
   }
 
   public textBoxManager() {

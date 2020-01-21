@@ -1,0 +1,59 @@
+<h4><strong>{{textBoxName}}</strong>の
+    <mat-form-field>
+        <mat-label>課程選択</mat-label>
+        <mat-select [(ngModel)]="selectedCourse" required (selectionChange)="onChange($event.value)"
+            [disabled]="selectedCourse > 0" cdkFocusInitial>
+            <mat-option [value]='-1'> </mat-option>
+            <mat-option *ngFor="let index of courseOptions" [value]="index">
+                第{{index}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>課程の単語登録</h4>
+<button mat-raised-button [disabled]="selectedCourse < 0" color="warn" (click)="addRows()">5行追加</button><button
+    mat-raised-button [disabled]="selectedCourse < 0" color="warn" (click)="clear()">クリア</button>
+<hr>
+<table mat-table [dataSource]="contentInfos" class="mat-elevation-z8">
+    <!-- Checkbox Column -->
+    <ng-container matColumnDef="select">
+        <th mat-header-cell *matHeaderCellDef style="width: 5%;">
+        </th>
+        <td mat-cell *matCellDef="let row">
+            <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null"
+                [checked]="selection.isSelected(row)" [aria-label]="checkboxLabel(row)">
+            </mat-checkbox>
+        </td>
+    </ng-container>
+    <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef style="width: 5%;"> ID. </th>
+        <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+    </ng-container>
+    <ng-container matColumnDef="content">
+        <th mat-header-cell *matHeaderCellDef style="width: 30%;"> 単語 </th>
+        <td mat-cell *matCellDef="let element">
+            <input type="text" class="form-control" [value]="element.content"
+                (input)="element.content = $event.target.value" spellcheck="true" />
+        </td>
+    </ng-container>
+
+    <ng-container matColumnDef="content1">
+        <th mat-header-cell *matHeaderCellDef style="width: 30%;"> 意味（日本語） </th>
+        <td mat-cell *matCellDef="let element">
+            <input type="text" class="form-control" [value]="element.content1"
+                (input)="element.content1 = $event.target.value" style="width: 95%;" />
+        </td>
+    </ng-container>
+
+    <ng-container matColumnDef="content2">
+        <th mat-header-cell *matHeaderCellDef style="width: 30%;"> 意味（中国語） </th>
+        <td mat-cell *matCellDef="let element">
+            <input type="text" class="form-control" [value]="element.content2"
+                (input)="element.content2 = $event.target.value" style="width: 95%;" />
+        </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+<hr>
+<button [disabled]="btnDisableFlg" mat-raised-button color="warn" (click)="delete()">削除</button>
+<button [disabled]="btnDisableFlg" mat-raised-button color="warn" (click)="save()">保存</button>

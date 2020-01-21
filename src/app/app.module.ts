@@ -8,9 +8,12 @@ import { MainPageComponent } from './pages/main-page/main-page.component';
 import { HeaderComponent, LoginDialog } from './pages/header/header.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AllMaterialModule } from './all-material-module';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TopinfoComponent } from './components/topinfo/topinfo.component';
-import { TextboxinfoComponent } from './components/textbox/textboxinfo/textboxinfo.component';
+import { TextboxinfoComponent, TextInfoDialog } from './components/textbox/textboxinfo/textboxinfo.component';
+import { ComfirmDialogComponent } from './components/comfirm-dialog/comfirm-dialog.component';
+import { WordCourseComponent } from './components/word-course/word-course.component';
+import { SentenceCourseComponent } from './components/sentence-course/sentence-course.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +22,11 @@ import { TextboxinfoComponent } from './components/textbox/textboxinfo/textboxin
     HeaderComponent,
     LoginDialog,
     TopinfoComponent,
-    TextboxinfoComponent
+    TextboxinfoComponent,
+    TextInfoDialog,
+    ComfirmDialogComponent,
+    WordCourseComponent,
+    SentenceCourseComponent
   ],
   imports: [
     BrowserModule,
@@ -28,10 +35,11 @@ import { TextboxinfoComponent } from './components/textbox/textboxinfo/textboxin
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    AllMaterialModule
+    AllMaterialModule,
+    ReactiveFormsModule
   ],
   providers: [],
-  entryComponents: [LoginDialog],
+  entryComponents: [LoginDialog, TextInfoDialog, ComfirmDialogComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

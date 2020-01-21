@@ -1,5 +1,5 @@
 {
-    "ManagerPassword": "000000000",
+    "ManagerPassword": "0",
     "WordPerTime": "10",
     "SentencePerTime": "30",
     "ApiUrl": "http://localhost:3000"

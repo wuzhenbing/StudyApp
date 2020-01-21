@@ -1,0 +1,23 @@
+<h1 mat-dialog-title>教材</h1>
+<hr>
+<div mat-dialog-content>
+    <form [formGroup]="editForm" (ngSubmit)="onOkClick()" class="form">
+        <mat-form-field class="form-field">
+            <input matInput type="text" placeholder="教材名を入力してください." formControlName="title" required cdkFocusInitial>
+            <mat-error *ngIf="title.invalid && (title.dirty || title.touched)">
+                教材名が <strong>必須項目</strong>です
+            </mat-error>
+        </mat-form-field>
+        <br>
+        <mat-form-field class="form-field">
+            <input matInput type="number" placeholder="課程数を入力してください." formControlName="courseCount" required>
+            <mat-error *ngIf="courseCount.invalid && (courseCount.dirty || courseCount.touched)">
+                課程数が <strong>必須項目</strong>です
+            </mat-error>
+        </mat-form-field>
+    </form>
+</div>
+<hr>
+<div mat-dialog-actions>
+    <button mat-raised-button color="warn" (click)="onOkClick()" [disabled]="!editForm.valid">Ok</button>
+</div>

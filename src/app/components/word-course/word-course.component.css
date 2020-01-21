@@ -1,0 +1,9 @@
+table {
+  width: 100%;
+}
+
+table input {
+    width: 98%;
+    height: 35px;
+    font-size: 150%;
+}
