@@ -33,6 +33,8 @@ export class WordCourseComponent implements OnInit {
 
   public noMainInfoFlg = false;
 
+  public mainId = null;
+
   ngOnInit() {
     this.bookId = this.route.snapshot.queryParams['id'];
     this.textBoxName = this.route.snapshot.queryParams['title'];
@@ -53,6 +55,7 @@ export class WordCourseComponent implements OnInit {
           this.noMainInfoFlg = false;
         }
         this.contentInfos = new MatTableDataSource<ContentInfo>(res);
+        this.mainId = res[0].mainId;
       },
       (error) => {
         alert(error);
@@ -65,6 +68,7 @@ export class WordCourseComponent implements OnInit {
     this.contentInfos = new MatTableDataSource<ContentInfo>();
     this.selection.clear();
     this.saveBtnDisableFlg = true;
+    this.mainId = null;
   }
 
   private initOption() {
@@ -82,8 +86,9 @@ export class WordCourseComponent implements OnInit {
     const count = this.contentInfos.data.length;
     for (let i = 1; i <= 5; i++) {
       const info = new ContentInfo();
-      info.id = count + i;
       info.bookId = this.bookId;
+      info.courseIndex = this.selectedCourse;
+      info.mainId = this.mainId;
       this.contentInfos.data.push(info);
     }
     this.contentInfos.filter = '';
@@ -91,9 +96,75 @@ export class WordCourseComponent implements OnInit {
   }
 
   save() {
-    const saveList = this.contentInfos.data.filter(
-      (v: ContentInfo) => AppUtils.isNullorUndefined(v.content) && AppUtils.isNullorUndefined(v.content1)
+    const allInfos = this.contentInfos.data.filter(
+      (v) => {
+        if (!AppUtils.isNullorUndefined(v.id) ||
+          (AppUtils.isNullorUndefined(v.id) && !AppUtils.isNullorUndefined(v.content) && !AppUtils.isNullorUndefined(v.content1))) {
+          return v;
+        }
+      }
     );
+
+    this.contentInfoService.saveContentInfos({
+      noMainInfoFlg: this.noMainInfoFlg,
+      mainId: this.mainId,
+      bookId: this.bookId,
+      courseIndex: this.selectedCourse,
+      type: 1,
+      title: `${this.textBoxName}の第${this.selectedCourse}課の単語テスト`,
+      infos: allInfos
+    }).subscribe(
+      () => {
+        alert('保存しました。');
+      },
+      (error) => {
+        alert('保存失敗しました。');
+      }
+    );
+
+    // const saveList = this.contentInfos.data.filter(
+    //   (v: ContentInfo) => !AppUtils.isNullorUndefined(v.content) && !AppUtils.isNullorUndefined(v.content1)
+    // );
+
+    // const deleteList = this.contentInfos.data.filter(
+    //   (v: ContentInfo) => AppUtils.isNullorUndefined(v.content)
+    //     && !AppUtils.isNullorUndefined(v.id)
+    // );
+
+    // if (this.noMainInfoFlg) {
+    //   const mainInfo = new MainInfo();
+    //   mainInfo.bookId = this.bookId;
+    //   mainInfo.courseIndex = this.selectedCourse;
+    //   mainInfo.type = 1;
+    //   mainInfo.title =
+    //     this.mainInfoService.insertMainInfo(mainInfo).subscribe(
+    //       (infos: MainInfo[]) => {
+    //         if (AppUtils.isNullorUndefined(infos) || infos.length === 0) {
+    //           alert('保存失敗しました。');
+    //         } else {
+    //           this.mainId = infos[0].mainid;
+    //           saveList.forEach(
+    //             (saveInfo) => {
+    //               saveInfo.mainid = this.mainId;
+    //             }
+    //           );
+    //           this.contentInfoService.insertContentInfo(saveList).subscribe(
+    //             () => {
+
+    //             },
+    //             (error) => {
+    //               alert('保存失敗しました。');
+    //             }
+    //           );
+
+    //         }
+    //       },
+    //       (error) => {
+    //         alert('保存失敗しました。');
+    //         alert(error);
+    //       }
+    //     );
+    // }
   }
 }
 

@@ -1,6 +1,6 @@
 export class ContentInfo {
     public id: number = null;
-    public mainid: number = null;
+    public mainId: number = null;
     public bookId: number = null;
     public courseIndex: number = null;
     public content: string = null;

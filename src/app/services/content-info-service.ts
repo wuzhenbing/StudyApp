@@ -16,4 +16,17 @@ export class ContentInfoService extends BaseService {
         return this.httpClient.post<T>(this.ApiUrl + `/ContentInfo?ACTION=INSERT`, JSON.stringify(contentInfos),
             { responseType: 'json', headers: new HttpHeaders({ 'Content-Type': 'application/json' }) });
     }
+
+    public saveContentInfos<T>(saveInfo: {
+        noMainInfoFlg: boolean,
+        mainId: number,
+        bookId: number,
+        courseIndex: number,
+        type: number,
+        title: string,
+        infos: ContentInfo[]
+    }): Observable<T> {
+        return this.httpClient.post<T>(this.ApiUrl + `/ContentInfo?ACTION=SAVE_ALL`, JSON.stringify(saveInfo),
+            { responseType: 'json', headers: new HttpHeaders({ 'Content-Type': 'application/json' }) });
+    }
 }
