@@ -14,7 +14,7 @@
 <hr>
 <table mat-table [dataSource]="contentInfos" class="mat-elevation-z8">
     <!-- Checkbox Column -->
-    <ng-container matColumnDef="select">
+    <!-- <ng-container matColumnDef="select">
         <th mat-header-cell *matHeaderCellDef style="width: 5%;">
         </th>
         <td mat-cell *matCellDef="let row">
@@ -22,32 +22,32 @@
                 [checked]="selection.isSelected(row)" [aria-label]="checkboxLabel(row)">
             </mat-checkbox>
         </td>
-    </ng-container>
-    <ng-container matColumnDef="id">
-        <th mat-header-cell *matHeaderCellDef style="width: 5%;"> ID. </th>
+    </ng-container> -->
+    <!-- <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef style="width: 10%;"> ID. </th>
         <td mat-cell *matCellDef="let element"> {{element.id}} </td>
-    </ng-container>
+    </ng-container> -->
     <ng-container matColumnDef="content">
-        <th mat-header-cell *matHeaderCellDef style="width: 30%;"> 単語 </th>
+        <th mat-header-cell *matHeaderCellDef style="width: 33%;"> 単語 </th>
         <td mat-cell *matCellDef="let element">
             <input type="text" class="form-control" [value]="element.content"
-                (input)="element.content = $event.target.value" spellcheck="true" />
+                (input)="element.content = $event.target.value" spellcheck="true" style="width: 98%;" />
         </td>
     </ng-container>
 
     <ng-container matColumnDef="content1">
-        <th mat-header-cell *matHeaderCellDef style="width: 30%;"> 意味（日本語） </th>
+        <th mat-header-cell *matHeaderCellDef style="width: 33%;"> 意味（日本語） </th>
         <td mat-cell *matCellDef="let element">
             <input type="text" class="form-control" [value]="element.content1"
-                (input)="element.content1 = $event.target.value" style="width: 95%;" />
+                (input)="element.content1 = $event.target.value" style="width: 98%;" />
         </td>
     </ng-container>
 
     <ng-container matColumnDef="content2">
-        <th mat-header-cell *matHeaderCellDef style="width: 30%;"> 意味（中国語） </th>
+        <th mat-header-cell *matHeaderCellDef style="width: 34%;"> 意味（中国語） </th>
         <td mat-cell *matCellDef="let element">
             <input type="text" class="form-control" [value]="element.content2"
-                (input)="element.content2 = $event.target.value" style="width: 95%;" />
+                (input)="element.content2 = $event.target.value" style="width: 98%;" />
         </td>
     </ng-container>
 
@@ -55,5 +55,4 @@
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
 <hr>
-<button [disabled]="btnDisableFlg" mat-raised-button color="warn" (click)="delete()">削除</button>
-<button [disabled]="btnDisableFlg" mat-raised-button color="warn" (click)="save()">保存</button>
+<button [disabled]="saveBtnDisableFlg" mat-raised-button color="warn" (click)="save()">保存</button>

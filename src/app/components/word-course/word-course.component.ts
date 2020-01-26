@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ContentInfo } from '../../dto/content-Info';
 import { MatTableDataSource } from '@angular/material/table';
-import { SelectionModel } from '@angular/cdk/collections';
 import { ActivatedRoute } from '@angular/router';
 import { ContentInfoService } from 'src/app/services/content-info-service';
 import { AppUtils } from 'src/app/utils/app-utils';
@@ -17,9 +16,11 @@ export class WordCourseComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private contentInfoService: ContentInfoService, private mainInfoService: MainInfoService) { }
 
-  public displayedColumns: string[] = ['select', 'id', 'content', 'content1', 'content2'];
+  public displayedColumns: string[] = ['content', 'content1', 'content2'];
+
+  // public displayedColumns: string[] = ['select', 'id', 'content', 'content1', 'content2'];
   public contentInfos: MatTableDataSource<ContentInfo> = new MatTableDataSource<ContentInfo>();
-  public selection = new SelectionModel<ContentInfo>(true, []);
+  // public selection = new SelectionModel<ContentInfo>(true, []);
 
   public bookId = null;
   public textBoxName = null;
@@ -36,13 +37,17 @@ export class WordCourseComponent implements OnInit {
   public mainId = null;
 
   ngOnInit() {
-    this.bookId = this.route.snapshot.queryParams['id'];
-    this.textBoxName = this.route.snapshot.queryParams['title'];
-    this.courseCount = this.route.snapshot.queryParams['courseCount'];
+    this.bookId = this.route.snapshot.queryParams.id;
+    this.textBoxName = this.route.snapshot.queryParams.title;
+    this.courseCount = this.route.snapshot.queryParams.courseCount;
     this.initOption();
   }
 
   onChange(v: number) {
+    this.getContentInfos(v);
+  }
+
+  private getContentInfos(v: number) {
     const searchInfo = new ContentInfo();
     searchInfo.bookId = this.bookId;
     searchInfo.courseIndex = v;
@@ -53,9 +58,10 @@ export class WordCourseComponent implements OnInit {
           this.noMainInfoFlg = true;
         } else {
           this.noMainInfoFlg = false;
+          this.mainId = res[0].mainId;
+          this.saveBtnDisableFlg = false;
         }
         this.contentInfos = new MatTableDataSource<ContentInfo>(res);
-        this.mainId = res[0].mainId;
       },
       (error) => {
         alert(error);
@@ -66,7 +72,7 @@ export class WordCourseComponent implements OnInit {
   clear() {
     this.selectedCourse = -1;
     this.contentInfos = new MatTableDataSource<ContentInfo>();
-    this.selection.clear();
+    // this.selection.clear();
     this.saveBtnDisableFlg = true;
     this.mainId = null;
   }
@@ -78,9 +84,9 @@ export class WordCourseComponent implements OnInit {
   }
 
   /** The label for the checkbox on the passed row */
-  checkboxLabel(row?: ContentInfo): string {
-    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.id + 1}`;
-  }
+  // checkboxLabel(row?: ContentInfo): string {
+  //   return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.id + 1}`;
+  // }
 
   addRows() {
     const count = this.contentInfos.data.length;
@@ -115,6 +121,7 @@ export class WordCourseComponent implements OnInit {
       infos: allInfos
     }).subscribe(
       () => {
+        this.getContentInfos(this.selectedCourse);
         alert('保存しました。');
       },
       (error) => {

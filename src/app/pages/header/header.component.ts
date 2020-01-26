@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { BaseComponent } from '../base-component';
 import { SystemContext } from 'src/app/utils/system-context';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { ConfigManager } from 'src/app/utils/config-manager';
+import { MatDialog } from '@angular/material/dialog';
 import { HeaderService, CounterType } from 'src/app/services/header-service';
 import { isNullOrUndefined } from 'util';
 import { Router } from '@angular/router';
+import { LoginDialogComponent } from 'src/app/components/login-dialog/login-dialog.component';
 
 @Component({
   selector: 'app-header',
@@ -51,7 +51,7 @@ export class HeaderComponent extends BaseComponent implements OnInit {
 
   public loginButton() {
     const dialogRef = this.dialog.open(
-      LoginDialog,
+      LoginDialogComponent,
       {
         width: '300px'
       }
@@ -74,22 +74,12 @@ export class HeaderComponent extends BaseComponent implements OnInit {
   public textBoxManager() {
     this.router.navigate(['TextBoxManager']);
   }
-}
 
-@Component({
-  selector: 'login-dialog',
-  templateUrl: 'login-dialog.html',
-})
-export class LoginDialog {
-  constructor(public dialogRef: MatDialogRef<LoginDialog>) { }
+  public createTest() {
+    this.router.navigate(['CreateTest']);
+  }
 
-  public password: string;
-
-  onOkClick(): void {
-    if (this.password === ConfigManager.getValue(ConfigManager.passKey)) {
-      this.dialogRef.close(true);
-    } else {
-      alert('パスワードが間違いました。');
-    }
+  public testManager() {
+    this.router.navigate(['TestManager']);
   }
 }

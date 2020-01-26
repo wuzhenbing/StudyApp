@@ -1,0 +1,12 @@
+<h1 mat-dialog-title>ログイン</h1>
+<hr>
+<div mat-dialog-content>
+    <p>パスワードを入力してください。</p>
+    <mat-form-field>
+        <input matInput type="password" [(ngModel)]="password" cdkFocusInitial>
+    </mat-form-field>
+</div>
+<hr>
+<div mat-dialog-actions>
+    <button mat-raised-button color="warn" (click)="onOkClick()">Ok</button>
+</div>

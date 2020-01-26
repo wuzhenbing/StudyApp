@@ -34,7 +34,7 @@
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
-
+<hr>
 <button mat-raised-button color="warn" (click)="new()" cdkFocusInitial>新規</button>
 <button mat-raised-button color="warn" (click)="delete()">削除</button>
 <button mat-raised-button color="warn" (click)="update()">更新</button>

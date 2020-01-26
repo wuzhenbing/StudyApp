@@ -67,7 +67,7 @@ export class TextboxinfoComponent extends BaseComponent implements OnInit {
 
   delete() {
     if (this.selection.selected.length === 0) {
-      alert('1行を選択してください。');
+      alert('1行以上を選択してください。');
     } else {
       // tslint:disable-next-line: no-use-before-declare
       const dialogRef = this.dialog.open(ComfirmDialogComponent, {
@@ -118,7 +118,7 @@ export class TextboxinfoComponent extends BaseComponent implements OnInit {
   }
 
   setSentenceCourse(info: TextBoxInfo) {
-
+    this.router.navigate(['SentenceCourse'], { queryParams: { id: info.id, title: info.title, courseCount: info.courseCount } });
   }
 }
 

@@ -14,19 +14,30 @@ import { TextboxinfoComponent, TextInfoDialog } from './components/textbox/textb
 import { ComfirmDialogComponent } from './components/comfirm-dialog/comfirm-dialog.component';
 import { WordCourseComponent } from './components/word-course/word-course.component';
 import { SentenceCourseComponent } from './components/sentence-course/sentence-course.component';
+import { TestManagerComponent } from './components/test-manager/test-manager.component';
+import { TypePipe } from './pipe/type-pipe';
+import { CreateTestComponent } from './components/create-test/create-test.component';
+import { LoginDialogComponent } from './components/login-dialog/login-dialog.component';
+import { CreateTitleDialogComponent } from './components/create-title-dialog/create-title-dialog.component';
+import { TodoTestComponent } from './components/todo-test/todo-test.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MainPageComponent,
     HeaderComponent,
-    LoginDialog,
     TopinfoComponent,
     TextboxinfoComponent,
     TextInfoDialog,
     ComfirmDialogComponent,
     WordCourseComponent,
-    SentenceCourseComponent
+    SentenceCourseComponent,
+    TestManagerComponent,
+    TypePipe,
+    CreateTestComponent,
+    LoginDialogComponent,
+    CreateTitleDialogComponent,
+    TodoTestComponent
   ],
   imports: [
     BrowserModule,
@@ -39,7 +50,12 @@ import { SentenceCourseComponent } from './components/sentence-course/sentence-c
     ReactiveFormsModule
   ],
   providers: [],
-  entryComponents: [LoginDialog, TextInfoDialog, ComfirmDialogComponent],
+  entryComponents: [
+    LoginDialogComponent,
+    TextInfoDialog,
+    ComfirmDialogComponent,
+    CreateTitleDialogComponent
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

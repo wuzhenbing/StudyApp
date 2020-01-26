@@ -1,0 +1,12 @@
+<h1 mat-dialog-title>名称入力</h1>
+<hr>
+<div mat-dialog-content>
+    <p>名称を入力してください。</p>
+    <mat-form-field style="width: 100%;">
+        <input matInput [(ngModel)]="title" cdkFocusInitial>
+    </mat-form-field>
+</div>
+<hr>
+<div mat-dialog-actions>
+    <button mat-raised-button color="warn" (click)="onOkClick()">Ok</button>
+</div>

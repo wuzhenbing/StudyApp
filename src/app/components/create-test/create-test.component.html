@@ -1,0 +1,56 @@
+<h4>試験作成</h4>
+<mat-form-field>
+    <mat-label>教材選択</mat-label>
+    <mat-select [(ngModel)]="selectedBookId" required (selectionChange)="onChange($event.value)"
+        [disabled]="selectedBookId > 0" cdkFocusInitial>
+        <mat-option [value]='-1'> </mat-option>
+        <mat-option *ngFor="let textBook of textBooks" [value]="textBook.id">
+            {{textBook.title}}
+        </mat-option>
+    </mat-select>
+</mat-form-field>
+<br>
+<button mat-raised-button [disabled]="selectedBookId < 0" color="warn" (click)="clear()">クリア</button>
+<hr>
+<table mat-table [dataSource]="testInfos" class="mat-elevation-z8">
+    <!-- Checkbox Column -->
+    <ng-container matColumnDef="select">
+        <th mat-header-cell *matHeaderCellDef style="width: 5%;">
+        </th>
+        <td mat-cell *matCellDef="let row">
+            <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null"
+                [checked]="selection.isSelected(row)" [aria-label]="checkboxLabel(row)">
+            </mat-checkbox>
+        </td>
+    </ng-container>
+    <!-- <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef style="width: 5%;"> ID. </th>
+        <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+    </ng-container> -->
+    <ng-container matColumnDef="title">
+        <th mat-header-cell *matHeaderCellDef style="width: 75%;"> タイトル </th>
+        <td mat-cell *matCellDef="let element"> {{element.title}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="courseIndex">
+        <th mat-header-cell *matHeaderCellDef style="width: 10%;"> 課程 </th>
+        <td mat-cell *matCellDef="let element"> 第{{element.courseIndex}}課 </td>
+    </ng-container>
+
+    <ng-container matColumnDef="type">
+        <th mat-header-cell *matHeaderCellDef style="width: 5%;"> 種類 </th>
+        <td mat-cell *matCellDef="let element"> {{element.type | TypePipe}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="contentsCount">
+        <th mat-header-cell *matHeaderCellDef style="width: 5%;"> 数 </th>
+        <td mat-cell *matCellDef="let element"> {{element.contentsCount}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+<hr>
+<button mat-raised-button color="warn" (click)="createTest()"
+    [disabled]='createBtnDisabled'>新規試験</button>&nbsp;&nbsp;<span
+    style="color:red;">単課程の場合一つ選択してください。纏めて試験したい場合複数を選択してください。</span>
