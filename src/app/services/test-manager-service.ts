@@ -1,7 +1,6 @@
 import { BaseService } from './base-service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { MainInfo } from '../dto/main-info';
 
 export class TestManagerService extends BaseService {
     constructor(public httpClient: HttpClient) {
@@ -14,6 +13,11 @@ export class TestManagerService extends BaseService {
 
     public saveTestInfo<T>(testTitle: string, testMainIds: number[]) {
         return this.httpClient.post<T>(this.ApiUrl + `/TestManager?ACTION=INSERT`, { title: testTitle, mainIds: testMainIds },
+            { responseType: 'json', headers: new HttpHeaders({ 'Content-Type': 'application/json' }) });
+    }
+
+    public getAllTodoTestInfos<T>() {
+        return this.httpClient.post<T>(this.ApiUrl + `/TestManager?ACTION=TODO_LIST`, null,
             { responseType: 'json', headers: new HttpHeaders({ 'Content-Type': 'application/json' }) });
     }
 }
