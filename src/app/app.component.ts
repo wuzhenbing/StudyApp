@@ -10,7 +10,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class AppComponent implements OnInit {
 
-  title = '学習アプリTest';
+  title = '学習アプリ';
 
   public constructor(private router: Router, private http: HttpClient) {
 
